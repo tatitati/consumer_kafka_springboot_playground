@@ -1,6 +1,5 @@
 package com.example.demo.consumer
 
-import com.example.demo.domain.LibraryEvent
 import com.fasterxml.jackson.core.JsonProcessingException
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.apache.kafka.clients.consumer.ConsumerRecord
@@ -17,6 +16,6 @@ class LibraryEventConsumer {
 
     @KafkaListener(topics = arrayOf("library-events"))
     fun myconsumer(consumerRecord: ConsumerRecord<Int, String>) {
-        
+        println(consumerRecord)
     }
 }
