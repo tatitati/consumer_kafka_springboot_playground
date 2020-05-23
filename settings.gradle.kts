@@ -1,1 +1,1 @@
-rootProject.name = "demo"
+rootProject.name = "consumer_kafka_springboot_playground"
