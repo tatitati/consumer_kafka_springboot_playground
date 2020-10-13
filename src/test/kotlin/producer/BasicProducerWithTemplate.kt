@@ -3,7 +3,6 @@ package producer
 import org.apache.kafka.clients.producer.ProducerConfig
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.clients.producer.RecordMetadata
-import org.apache.kafka.streams.state.RocksDBConfigSetter.LOG
 import org.junit.jupiter.api.Test
 import org.springframework.kafka.core.DefaultKafkaProducerFactory
 import org.springframework.kafka.core.KafkaTemplate
@@ -43,16 +42,16 @@ class BasicProducerWithTemplate {
 	}
 
 	@Test
-	fun `can producer msgs to a topic with kafkaTemplateWithDefaultProducer`(){
-		kafkaTemplateWithDefaultProducer()
+	fun `SYNC PRODUCER -- produce msgs to a topic with kafkaTemplateWithDefaultProducer`(){
+		val futureResult = kafkaTemplateWithDefaultProducer()
 				.send(
-						ProducerRecord<String?, String?>("spring", "this is the msgggg again"))
+						ProducerRecord<String?, String?>("spring", "this is the msgggg again 3434343"))
 
-		Thread.sleep(6000)
+		futureResult.get()
 	}
 
 	@Test
-	fun `can producer msgs to a topic with kafkaTemplateWithProducerListener`(){
+	fun `ASYNC PRODUCER -- produce msgs to a topic with kafkaTemplateWithProducerListener`(){
 		kafkaTemplateWithProducerListener()
 				.send(
 						ProducerRecord<String?, String?>("spring", "this is the msgggg again"))
